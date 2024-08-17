@@ -1,7 +1,8 @@
+
 export function Home() {
   return (
     <div>
-      <h1 className="font-bold">Home</h1>
+      <h1>Pagina Home</h1>
     </div>
-  );
+  )
 }

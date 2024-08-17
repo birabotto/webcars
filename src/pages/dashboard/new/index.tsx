@@ -1,7 +1,7 @@
 export function New() {
   return (
     <div>
-      <h1 className="font-bold">New Car</h1>
+      <h1>Pagina Cadastrar carro</h1>
     </div>
-  );
+  )
 }

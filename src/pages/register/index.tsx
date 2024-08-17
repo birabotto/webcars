@@ -1,7 +1,7 @@
 export function Register() {
   return (
     <div>
-      <h1 className="font-bold">Register</h1>
+      <h1>Pagina Cadastro</h1>
     </div>
-  );
+  )
 }

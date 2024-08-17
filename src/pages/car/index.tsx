@@ -1,7 +1,7 @@
 export function CarDetail() {
   return (
     <div>
-      <h1 className="font-bold">CarDetail</h1>
+      <h1>Pagina Detalhes</h1>
     </div>
-  );
+  )
 }

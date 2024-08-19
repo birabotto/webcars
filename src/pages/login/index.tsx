@@ -1,64 +1,63 @@
-import { useEffect } from "react";
-import logoImg from "../../assets/logo.svg";
-import { Link, useNavigate } from "react-router-dom";
-import { Container } from "../../components/container";
+import { useEffect } from 'react'
+import logoImg from '../../assets/logo.svg'
+import { Link, useNavigate } from 'react-router-dom'
+import { Container } from '../../components/container'
 
-import { Input } from "../../components/input";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-
-import { auth } from "../../services/firebaseConnection";
-import { signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { Input } from '../../components/input'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod'
+import { signInWithEmailAndPassword, signOut } from 'firebase/auth'
+import { auth } from '../../services/firebaseConnection'
 
 const schema = z.object({
-  email: z
-    .string()
-    .email("Insira um email válido")
-    .nonempty("O campo email é obrigatório"),
-  password: z.string().nonempty("O campo senha é obrigatório"),
-});
+  email: z.string().email("Insira um email válido").nonempty("O campo email é obrigatório"),
+  password: z.string().nonempty("O campo senha é obrigatório")
+})
 
-type FormData = z.infer<typeof schema>;
+type FormData = z.infer<typeof schema>
 
 export function Login() {
   const navigate = useNavigate();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormData>({
+  const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
     resolver: zodResolver(schema),
-    mode: "onChange",
-  });
-
-  function onSubmit(data: FormData) {
-    signInWithEmailAndPassword(auth, data.email, data.password)
-      .then((user) => {
-        console.log(user);
-        navigate("/dashboard", { replace: true });
-      })
-      .catch((error) => {
-        console.error(`ERRO ao logar ${error}`);
-      });
-  }
+    mode: "onChange"
+  })
 
   useEffect(() => {
-    async function handleLogOut() {
-      await signOut(auth);
+    async function handleLogout(){
+      await signOut(auth)
     }
 
-    handleLogOut();
-  }, []);
+    handleLogout();
+  }, [])
+
+
+  function onSubmit(data: FormData){
+    signInWithEmailAndPassword(auth, data.email, data.password)
+    .then((user) => {
+      console.log("LOGADO COM SUCESSO!")
+      console.log(user)
+      navigate("/dashboard", { replace: true })
+    })
+    .catch(err => {
+      console.log("ERRO AO LOGAR")
+      console.log(err);
+    })
+  }
 
   return (
     <Container>
       <div className="w-full min-h-screen flex justify-center items-center flex-col gap-4">
         <Link to="/" className="mb-6 max-w-sm w-full">
-          <img src={logoImg} alt="Logo do site" className="w-full" />
+          <img
+            src={logoImg}
+            alt="Logo do site"
+            className="w-full"
+          />
         </Link>
 
-        <form
+        <form 
           className="bg-white max-w-xl w-full rounded-lg p-4"
           onSubmit={handleSubmit(onSubmit)}
         >
@@ -82,16 +81,17 @@ export function Login() {
             />
           </div>
 
-          <button
-            type="submit"
-            className="bg-zinc-900 w-full rounded-md text-white h-10 font-medium"
-          >
+          <button type="submit" className="bg-zinc-900 w-full rounded-md text-white h-10 font-medium">
             Acessar
           </button>
+
         </form>
 
-        <Link to="/register">Ainda não possui uma conta? Cadastre-se</Link>
+        <Link to="/register">
+          Ainda não possui uma conta? Cadastre-se
+        </Link>
+
       </div>
     </Container>
-  );
+  )
 }

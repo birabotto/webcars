@@ -1,20 +1,22 @@
+
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
-import { getStorage } from "firebase/storage";
+import { getAuth } from 'firebase/auth'
+import { getFirestore } from 'firebase/firestore'
+import { getStorage } from 'firebase/storage'
+
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAMA6_Xu0CNo9scQGkBYFGnMxQdqe8tQTQ",
-  authDomain: "webcars-3f28c.firebaseapp.com",
-  projectId: "webcars-3f28c",
-  storageBucket: "webcars-3f28c.appspot.com",
-  messagingSenderId: "385043489775",
-  appId: "1:385043489775:web:b4f3058436ed5e39fdcc1a",
+  apiKey: "AIzaSyAkwJFFHDIUFiLj60c9R1x7PogZmuqwthY",
+  authDomain: "webcarros-c5b8b.firebaseapp.com",
+  projectId: "webcarros-c5b8b",
+  storageBucket: "webcarros-c5b8b.appspot.com",
+  messagingSenderId: "880717485089",
+  appId: "1:880717485089:web:e878f6b9792afdc9e7bf60"
 };
 
 const app = initializeApp(firebaseConfig);
 
-const db = getFirestore(app);
+const db = getFirestore(app)
 const auth = getAuth(app);
 const storage = getStorage(app);
 
